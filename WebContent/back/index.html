@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/login.css">
+<link rel="shortcut icon" href="../images/copylogo.png" type="image/x-icon" />
+<script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+function checkLogin() {
+	var account = $.trim($("#account").val());
+	var pwd = $.trim($("#pwd").val());
+	
+	if (account == "") {
+		alert("请输入账号...");
+		return;
+	}
+	
+	if (pwd == "") {
+		alert("请输入密码...");
+		return;
+	}
+
+	//location.href="manager/index.html";
+	//管理员异步请求登录		指令
+	$.post("../admin",{op:"login",aname: account,pwd: pwd},data=>{
+		console.log(data);
+		if(data == 200){
+			//登录成功 获取从哪个页面跳转过来的
+			var temp = document.referrer;//获取来源链接
+			if(temp == "" || temp == undefined || temp.indexOf("register.html")){
+				location.href = "manager/index.html";//跳转主页
+			}else{
+				//上一个界面
+				history.go(-1);
+			}
+			
+			return;
+		}
+		//登陆失败
+		$("#myform")[0].reset();//重置表单
+		alert("账号或密码错误，请确认后重新登录...");
+	});
+	//演示跨域
+	/*$.post("http://localhost:8080/blog/admin",{op:"login",aname: account,pwd: pwd},data=>{
+		console.log(data);
+		if(data == 200){
+			//登录成功
+			location.href = "manager/index.html";//跳转主页
+			return;
+		}
+		//登陆失败
+		$("#myform")[0].reset();//重置表单
+		alert("账号或密码错误，请确认后重新登录...");
+	})*/
+}
+</script>
+<title>后台登陆</title>
+</head>
+<body>
+	<div id="login_top">
+		<div id="welcome">
+			欢迎使用源辰个人博客后台管理系统
+		</div>
+		<div id="back">
+			<a href="../index.html">返回首页</a>&nbsp;&nbsp; | &nbsp;&nbsp;
+			<a href="#">帮助</a>
+		</div>
+	</div>
+	<div id="login_center">
+		<div id="login_area">
+			<div id="login_form">
+				<form action="index.html" method="post" id="myform">
+					<div id="login_tip">
+						用户登录&nbsp;&nbsp;UserLogin
+					</div>
+					<div><input type="text" class="username" id="account" placeholder="请输入账号..."></div>
+					<div><input type="password" class="pwd" id="pwd" placeholder="请输入密码..."></div>
+					<div id="btn_area">
+						<input type="button"  onclick="checkLogin()" id="sub_btn" value="登&nbsp;&nbsp;录">&nbsp;&nbsp;
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="login_bottom">
+		<label style="color:#FFF"><a class="copy" href="http://www.hyycinfo.com">源辰信息 </a>&copy; 版权所有</label>
+	</div>
+</body>
+</html>

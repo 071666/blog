@@ -1,0 +1,60 @@
+*{
+	font-family: "微软雅黑";
+}
+
+.fontLogo{
+	font-size: 30px !important;
+	font-family: "Courier New";
+	font-weight: bold;
+	padding:0px;
+	margin: 0px;
+}
+.userP{
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+}
+
+#userLogin{
+	background:#ccc;
+	border:1px solid #666;
+	width:260px;
+	height:140px;
+	position: absolute;
+	z-index:100;
+	display: none;
+	top:50%;
+	left:50%;
+	-webkit-transform:translate(-50%,-50%);
+	-moz-transform:translate(-50%,-50%);
+	transform:translate(-50%,-50%);
+	padding-left:10px;
+	padding-top:10px;
+}
+
+h3,h4{
+	text-align:center;
+}
+
+h5{
+	line-height:1.5em;
+}
+
+.contentheight{
+	height:188px !important;
+	overflow: hidden;
+}
+
+#showmore{
+	line-height:40px;
+	background-color: #dff0d8;
+	border-color: #d6e9c6;
+	color: #3c763d;
+	font-size: 16px;
+	text-align: center;
+	cursor: pointer;
+}
+
+#showmore:hover{
+	color:rgb(234, 56, 56);
+}
